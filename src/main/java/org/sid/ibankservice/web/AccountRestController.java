@@ -15,10 +15,15 @@ import java.util.UUID;
 @RequestMapping("/api")
 
 public class AccountRestController {
-    @Autowired
+
     private BankAccountRepository bankAccountRepository;
-    @Autowired
+
     private AccountService accountService;
+
+    public AccountRestController(BankAccountRepository bankAccountRepository, AccountService accountService) {
+        this.bankAccountRepository = bankAccountRepository;
+        this.accountService = accountService;
+    }
 
     @GetMapping("/bankAccounts")
     public List<BankAccount> bankAccounts() {

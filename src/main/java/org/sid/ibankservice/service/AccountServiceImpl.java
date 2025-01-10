@@ -14,8 +14,12 @@ import java.util.UUID;
 @Service
 @Transactional
 public class AccountServiceImpl implements AccountService {
-    @Autowired
     BankAccountRepository bankAccountRepository;
+
+    public AccountServiceImpl(BankAccountRepository bankAccountRepository) {
+        this.bankAccountRepository = bankAccountRepository;
+    }
+
     @Override
     public BankAccountResponseDTO addAccount(BankAccountRequestDTO bankAccountDTO) {
         BankAccount bankAccount = BankAccount.builder()
