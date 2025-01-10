@@ -8,6 +8,7 @@ class IbankserviceApplicationTests {
 
 	@Test
 	void contextLoads() {
+		throw new UnsupportedOperationException("Test not implemented yet.");
 	}
 
 }

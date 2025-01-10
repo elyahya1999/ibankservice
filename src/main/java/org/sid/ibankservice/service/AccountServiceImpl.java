@@ -4,7 +4,6 @@ import org.sid.ibankservice.dto.BankAccountRequestDTO;
 import org.sid.ibankservice.dto.BankAccountResponseDTO;
 import org.sid.ibankservice.entities.BankAccount;
 import org.sid.ibankservice.repositories.BankAccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +13,7 @@ import java.util.UUID;
 @Service
 @Transactional
 public class AccountServiceImpl implements AccountService {
-    BankAccountRepository bankAccountRepository;
+    private final BankAccountRepository bankAccountRepository;
 
     public AccountServiceImpl(BankAccountRepository bankAccountRepository) {
         this.bankAccountRepository = bankAccountRepository;
@@ -29,14 +28,15 @@ public class AccountServiceImpl implements AccountService {
                 .devise(bankAccountDTO.getDevise())
                 .accountType(bankAccountDTO.getAccountType())
                 .build();
-        BankAccount savedbqsaccount=bankAccountRepository.save(bankAccount);
-        BankAccountResponseDTO bankAccountResponseDTO = BankAccountResponseDTO.builder()
+
+        BankAccount savedbqsaccount = bankAccountRepository.save(bankAccount);
+
+        return BankAccountResponseDTO.builder()
                 .id(savedbqsaccount.getId())
                 .dateCreation(savedbqsaccount.getDateCreation())
                 .balance(savedbqsaccount.getBalance())
                 .devise(savedbqsaccount.getDevise())
                 .accountType(savedbqsaccount.getAccountType())
                 .build();
-        return bankAccountResponseDTO;
     }
 }
